@@ -20,3 +20,5 @@ RUN chsh -s $(which zsh) $(id -un 1000)
 USER 1000
 
 RUN curl https://raw.githubusercontent.com/shyd/dotfiles/main/run-once.sh | bash
+
+VOLUME /home/coder
