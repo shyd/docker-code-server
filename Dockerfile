@@ -34,9 +34,8 @@ RUN mkdir ~/.ssh
 RUN chmod 700 ~/.ssh
 RUN mkdir ~/.aws
 
-RUN code-server --install-extension \
-        github.github-vscode-theme \
-        amazonwebservices.aws-toolkit-vscode
+RUN code-server --install-extension github.github-vscode-theme
+RUN code-server --install-extension amazonwebservices.aws-toolkit-vscode
 
 RUN curl https://raw.githubusercontent.com/shyd/dotfiles/main/run-once.sh | bash
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
