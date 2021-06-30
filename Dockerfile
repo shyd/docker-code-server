@@ -30,6 +30,11 @@ RUN chsh -s $(which zsh) $(id -un 1000)
 
 USER 1000
 RUN mkdir ~/projects
+RUN mkdir ~/.ssh
+RUN chmod 700 ~/.ssh
+
+RUN code-server --install-extension github.github-vscode-theme
+
 RUN curl https://raw.githubusercontent.com/shyd/dotfiles/main/run-once.sh | bash
 
 
@@ -46,7 +51,9 @@ RUN $HOME/.rbenv/bin/rbenv global 2.6.0
 RUN echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
 RUN echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 
-VOLUME /home/coder
+VOLUME /home/coder/projects
+VOLUME /home/coder/.ssh
+VOLUME /home/coder/.local/share/code-server/User/
 
 # some devel ports
 EXPOSE 3000
