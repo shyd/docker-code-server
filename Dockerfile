@@ -3,7 +3,18 @@ FROM codercom/code-server
 USER root
 
 RUN apt update && \
-    apt -y install curl
+    apt -y install vim zsh wget curl git tree rsync openssh-client zip default-mysql-client dnsutils \
+        nodejs npm yarn \
+        imagemagick graphicsmagick \
+        libssl-dev libreadline-dev zlib1g-dev \
+        autoconf bison build-essential libyaml-dev \
+        libreadline-dev libncurses5-dev libffi-dev libgdbm-dev \
+        sudo
+
+RUN npm install -g gulp-cli bower gh-pages
+# remove orphans
+RUN rm -rf $HOME/.npm
+#RUN rm $HOME/.wget-hsts
 
 ENV TERM=xterm-256color
 
@@ -21,4 +32,24 @@ USER 1000
 RUN mkdir ~/projects
 RUN curl https://raw.githubusercontent.com/shyd/dotfiles/main/run-once.sh | bash
 
+
+# install ruby in rbenv
+SHELL ["/bin/bash", "-c"]
+RUN curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
+
+RUN export PATH="$HOME/.rbenv/bin:$PATH"
+RUN eval "$($HOME/.rbenv/bin/rbenv init -)"
+
+RUN $HOME/.rbenv/bin/rbenv install 2.6.0
+RUN $HOME/.rbenv/bin/rbenv global 2.6.0
+
+RUN echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
+RUN echo 'eval "$(rbenv init -)"' >> ~/.zshrc
+
 VOLUME /home/coder
+
+# some devel ports
+EXPOSE 3000
+EXPOSE 3001
+EXPOSE 3002
+EXPOSE 3003
