@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+    - checkout
+    - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+    - run: docker build -t shyd/code-server .
+    - run: docker push shyd/code-server
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build:
+        filters:
+          branches:
+            only: master
