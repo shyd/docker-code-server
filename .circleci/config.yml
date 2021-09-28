@@ -12,6 +12,8 @@ workflows:
   workflow:
     jobs:
     - build:
+        context:
+          - general
         filters:
           branches:
             only: main
