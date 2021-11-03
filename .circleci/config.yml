@@ -17,3 +17,19 @@ workflows:
         filters:
           branches:
             only: main
+  weekly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - main
+  nightly:
+    triggers:
+      - schedule:
+          cron: "50 6 * * *"
+          filters:
+            branches:
+              only:
+                - main
