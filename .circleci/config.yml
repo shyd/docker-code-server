@@ -25,11 +25,15 @@ workflows:
             branches:
               only:
                 - main
+    jobs:
+      - build
   nightly:
     triggers:
       - schedule:
-          cron: "50 6 * * *"
+          cron: "55 6 * * *"
           filters:
             branches:
               only:
                 - main
+    jobs:
+      - build
