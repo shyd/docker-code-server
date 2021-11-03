@@ -20,10 +20,13 @@ workflows:
   weekly:
     triggers:
       - schedule:
-          cron: "0 0 * * 0"
+          #cron: "0 0 * * 0"
+          cron: "0 7 * * *"
           filters:
             branches:
               only:
                 - main
     jobs:
       - build
+          context:
+            - general
