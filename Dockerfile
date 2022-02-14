@@ -23,7 +23,7 @@ RUN curl https://raw.githubusercontent.com/shyd/dotfiles/main/run-once.sh | bash
 RUN rm -rf /var/lib/apt/lists/*
 
 # add Hack Nerd Font
-#RUN sed -i 's/<\/head>/<link rel="stylesheet" href="https:\/\/cdnjs.schuett.link\/Hack%20Nerd%20Font.css"><\/head>/g' /usr/lib/code-server/src/browser/pages/vscode.html
+RUN sed -i 's/<\/head>/<link rel="stylesheet" href="https:\/\/cdnjs.schuett.link\/Hack%20Nerd%20Font.css"><\/head>/g' /usr/lib/code-server/vendor/modules/code-oss-dev/out/vs/code/browser/workbench/workbench.html
 
 RUN chsh -s $(which zsh)
 RUN chsh -s $(which zsh) $(id -un 1000)
