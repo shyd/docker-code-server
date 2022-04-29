@@ -23,7 +23,17 @@ RUN curl https://raw.githubusercontent.com/shyd/dotfiles/main/run-once.sh | bash
 RUN rm -rf /var/lib/apt/lists/*
 
 # add Hack Nerd Font
-RUN sed -i 's/<\/head>/<link rel="stylesheet" href="https:\/\/cdnjs.schuett.link\/Hack%20Nerd%20Font.css"><\/head>/g' /usr/lib/code-server/vendor/modules/code-oss-dev/out/vs/code/browser/workbench/workbench.html
+# thanks https://github.com/demyxsh/code-server/blob/master/tag-latest/Dockerfile
+RUN set -ex; \
+    # Custom fonts
+    cd /usr/local/lib/code-server/src/browser/pages; \
+    curl -O "https://cdnjs.schuett.link/{hack-nerd-font.css}"; \
+    \
+    CODE_WORKBENCH="$(find /usr/local/lib/code-server -name "*workbench.html")"; \
+    sed -i 's|</head>|\
+    <link rel="stylesheet" href="_static/src/browser/pages/hack-nerd-font.css"> \n\
+    </head>|g' "$CODE_WORKBENCH"; \
+    \
 
 RUN chsh -s $(which zsh)
 RUN chsh -s $(which zsh) $(id -un 1000)
