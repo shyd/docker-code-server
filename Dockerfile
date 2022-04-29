@@ -5,7 +5,7 @@ USER root
 RUN apt update && \
     apt -y install vim zsh wget curl git tree rsync openssh-client zip default-mysql-client dnsutils \
         nodejs npm yarn \
-        imagemagick graphicsmagick \
+        imagemagick graphicsmagick libvips libvips-dev \
         libssl-dev libreadline-dev zlib1g-dev \
         autoconf bison build-essential libyaml-dev \
         libreadline-dev libncurses5-dev libffi-dev libgdbm-dev \
@@ -29,7 +29,7 @@ RUN set -ex; \
     cd /usr/lib/code-server/src/browser/pages; \
     curl -O "https://cdnjs.schuett.link/{hack-nerd-font.css}"; \
     \
-    CODE_WORKBENCH="$(find /usr/local/lib/code-server -name "*workbench.html")"; \
+    CODE_WORKBENCH="$(find /usr/lib/code-server -name "*workbench.html")"; \
     sed -i 's|</head>|\
     <link rel="stylesheet" href="_static/src/browser/pages/hack-nerd-font.css"> \n\
     </head>|g' "$CODE_WORKBENCH"; \
