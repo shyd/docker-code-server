@@ -26,7 +26,7 @@ RUN rm -rf /var/lib/apt/lists/*
 # thanks https://github.com/demyxsh/code-server/blob/master/tag-latest/Dockerfile
 RUN set -ex; \
     # Custom fonts
-    cd /usr/local/lib/code-server/src/browser/pages; \
+    cd /usr/lib/code-server/src/browser/pages; \
     curl -O "https://cdnjs.schuett.link/{hack-nerd-font.css}"; \
     \
     CODE_WORKBENCH="$(find /usr/local/lib/code-server -name "*workbench.html")"; \
