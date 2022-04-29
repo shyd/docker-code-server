@@ -32,8 +32,7 @@ RUN set -ex; \
     CODE_WORKBENCH="$(find /usr/lib/code-server -name "*workbench.html")"; \
     sed -i 's|</head>|\
     <link rel="stylesheet" href="_static/src/browser/pages/hack-nerd-font.css"> \n\
-    </head>|g' "$CODE_WORKBENCH"; \
-    \
+    </head>|g' "$CODE_WORKBENCH";
 
 RUN chsh -s $(which zsh)
 RUN chsh -s $(which zsh) $(id -un 1000)
