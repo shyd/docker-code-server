@@ -67,6 +67,8 @@ RUN $HOME/.rbenv/bin/rbenv global 2.6.0
 RUN echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
 RUN echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 
+#TODO add nvm https://github.com/nvm-sh/nvm#installing-and-updating
+
 VOLUME /home/coder/projects
 VOLUME /home/coder/.ssh
 VOLUME /home/coder/.aws
