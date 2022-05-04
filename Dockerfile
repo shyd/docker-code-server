@@ -22,17 +22,25 @@ RUN curl https://raw.githubusercontent.com/shyd/dotfiles/main/run-once.sh | bash
 
 RUN rm -rf /var/lib/apt/lists/*
 
-# add Hack Nerd Font
+# add Nerd Font
 # thanks https://github.com/demyxsh/code-server/blob/master/tag-latest/Dockerfile
 RUN set -ex; \
     # Custom fonts
     cd /usr/lib/code-server/src/browser/pages; \
-    curl -O "https://cdnjs.schuett.link/{hack-nerd-font.css}"; \
+    curl -O "https://cdnjs.schuett.link/fonts/{meslolgs-nf-regular.woff,meslolgs-nf-bold.woff,meslolgs-nf-italic.woff,meslolgs-nf-bold-italic.woff}"; \
     \
     CODE_WORKBENCH="$(find /usr/lib/code-server -name "*workbench.html")"; \
-    sed -i 's|</head>|\
-    <link rel="stylesheet" href="_static/src/browser/pages/hack-nerd-font.css"> \n\
-    </head>|g' "$CODE_WORKBENCH";
+    sed -i "s|</head>|\
+    <style> \n\
+        @font-face { \n\
+        font-family: 'MesloLGS NF'; \n\
+        font-style: normal; \n\
+        src: url('_static/src/browser/pages/meslolgs-nf-regular.woff') format('woff'), \n\
+        url('_static/src/browser/pages/meslolgs-nf-bold.woff') format('woff'), \n\
+        url('_static/src/browser/pages/meslolgs-nf-italic.woff') format('woff'), \n\
+        url('_static/src/browser/pages/meslolgs-nf-bold-italic.woff') format('woff'); \n\
+    } \n\
+    \n\</style></head>|g" "$CODE_WORKBENCH";
 
 RUN chsh -s $(which zsh)
 RUN chsh -s $(which zsh) $(id -un 1000)
