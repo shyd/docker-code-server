@@ -75,7 +75,14 @@ RUN $HOME/.rbenv/bin/rbenv global 2.6.0
 RUN echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
 RUN echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 
-#TODO add nvm https://github.com/nvm-sh/nvm#installing-and-updating
+# add nvm https://github.com/nvm-sh/nvm#installing-and-updating
+# and install latest node version
+RUN set +ex; \
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash; \
+    export NVM_DIR="$HOME/.nvm"; \
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; \
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"; \
+    nvm install node
 
 VOLUME /home/coder/projects
 VOLUME /home/coder/.ssh
