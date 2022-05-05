@@ -26,6 +26,6 @@ workflows:
               only:
                 - main
     jobs:
-      - build
+      - build:
           context:
             - general
