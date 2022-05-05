@@ -17,16 +17,15 @@ workflows:
         filters:
           branches:
             only: main
-# scheduled jobs with context fail (Nov. 2021)
-#  weekly:
-#    triggers:
-#      - schedule:
-#          cron: "0 0 * * 0"
-#          filters:
-#            branches:
-#              only:
-#                - main
-#    jobs:
-#      - build
-#          context:
-#            - general
+  weekly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - build
+          context:
+            - general
