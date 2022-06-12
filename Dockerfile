@@ -2,6 +2,8 @@ FROM codercom/code-server
 
 USER root
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt update && \
     apt -y install vim zsh wget curl git tree rsync openssh-client zip default-mysql-client dnsutils \
         nodejs npm yarn \
