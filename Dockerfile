@@ -4,6 +4,8 @@ USER root
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+RUN curl https://raw.githubusercontent.com/shyd/dotfiles/main/run-once.sh | bash
+
 RUN apt update && \
     apt -y install vim zsh wget curl git tree rsync openssh-client zip default-mysql-client dnsutils \
         nodejs npm yarn \
@@ -19,8 +21,6 @@ RUN rm -rf $HOME/.npm
 #RUN rm $HOME/.wget-hsts
 
 ENV TERM=xterm-256color
-
-RUN curl https://raw.githubusercontent.com/shyd/dotfiles/main/run-once.sh | bash
 
 RUN rm -rf /var/lib/apt/lists/*
 
