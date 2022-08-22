@@ -79,6 +79,7 @@ RUN echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 RUN set -ex; \
     git clone https://github.com/asdf-vm/asdf.git ~/.asdf; \
     . $HOME/.asdf/asdf.sh; \
+    asdf plugin add nodejs; \
     asdf install nodejs latest; \
     asdf global nodejs latest;
 
